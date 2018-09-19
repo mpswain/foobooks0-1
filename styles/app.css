@@ -1,0 +1,23 @@
+body {
+    padding: 20px;
+}
+
+ul.books {
+    list-style-type: none;
+    padding: 0;
+}
+
+li.book {
+    border: 1px solid silver;
+    max-width: 300px;
+    margin: 0 0 15px 0;
+    padding: 10px;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.author {
+    font-style: italic;
+}
