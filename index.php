@@ -1,5 +1,5 @@
 <?php
-require('logic.php');
+require 'logic.php';
 ?>
 
 <!DOCTYPE html>
