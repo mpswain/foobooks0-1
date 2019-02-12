@@ -9,10 +9,10 @@ require 'logic.php';
     <title>Foobooks0</title>
     <meta charset='utf-8'>
 
-    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'
-          rel='stylesheet'
-          integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO'
-          crossorigin='anonymous'>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
+          crossorigin="anonymous">
 
     <link href='/styles/app.css' rel='stylesheet'>
 
