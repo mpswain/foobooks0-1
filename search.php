@@ -7,39 +7,40 @@
  * 3. Store the results in the SESSION
  * 4. Redirect the visitor back to index.php
  */
+require 'includes/helpers.php';
+require 'Book.php';
+require 'Form.php';
+
+use Foobooks0\Book;
+use DWA\Form;
 
 # We'll be storing data in the session, so initiate it
 session_start();
 
-# Not strictly necessary, but helpful if you need to use the dump statement when debugging
-require('includes/helpers.php');
+# Instantiate our objects
+$book = new Book('books.json');
+$form = new Form($_POST);
 
 # Get data from form request
-$searchTerm = $_POST['searchTerm'];
-$caseSensitive = isset($_POST['caseSensitive']);
+$searchTerm = $form->get('searchTerm');
+$caseSensitive = $form->has('caseSensitive');
 
-# Load book data
-$booksJson = file_get_contents('books.json');
-$books = json_decode($booksJson, true);
+# Validate the form data
+$errors = $form->validate([
+    'searchTerm' => 'required'
+]);
 
-# Filter book data according to search term
-foreach($books as $title => $book) {
-    if($caseSensitive) {
-        $match = $title == $searchTerm;
-    } else {
-        $match = strtolower($title) == strtolower($searchTerm);
-    }
-
-    if(!$match) {
-        unset($books[$title]);
-    }
+if(!$form->hasErrors) {
+    $books = $book->getByTitle($caseSensitive, $searchTerm);
 }
 
 # Store our results data in the SESSION so it's available when we redirect back to index.php
 $_SESSION['results'] = [
+    'errors' => $errors,
+    'hasErrors' => $form->hasErrors,
     'searchTerm' => $searchTerm,
-    'books' => $books,
-    'bookCount' => count($books),
+    'books' => $books ?? null,
+    'bookCount' => isset($books) ? count($books) : 0,
     'caseSensitive' => $caseSensitive,
 ];
 
